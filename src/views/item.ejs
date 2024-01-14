@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadatos del documento -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta nombre="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Título de la página y enlace a la hoja de estilos -->
+    <title>Item | Funkoshop</title>
+    <link rel="stylesheet" href="/css/item.css">
+    <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+    
+    <%- include('partials/header') %>
+
+<!-- Contenedor principal -->
+<main class="container">
+    <!-- Sección del artículo -->
+
+    <section class="item">
+        <!-- Imágenes del artículo -->
+        <picture class="img tarjeta__cover">
+            <img class="tarjeta__img-frontal" src="/img<%= item.image_front %>" alt="<%= item.product_description %>">
+            <img class="tarjeta__img-detras" src="/img<%= item.image_back %>" alt="<%= item.product_description %>">
+        </picture>
+        <!-- Información del artículo -->
+        <article class="item__info">
+            <p class="item__coleccion"><%= item.category.category_name %></p>
+            <h3 class="item__nombre"><%= item.product_name %></h3>
+            <p class="item__description"><%= item.product_description %></p>
+            <p class="item__precio"><%= item.price %></p>
+            <!-- Formulario para agregar al carrito -->
+            <form class="item__carrito" action="#" method="POST" enctype="application/x-www-form-urlencoded">
+                <button id="subtract" class="item__quantity" type="button">-</button>
+                <input id="quantity" class="item__input" type="text" nombre="quantity" placeholder="0">
+                <button id="add" class="item__quantity" type="button">+</button>
+                <button class="item__submit btn btn--primary btn--medium" type="submit">Agregar al carrito</button>
+            </form>
+            <p class="item__promo"><a href="">Ver métodos de pago</a> - <%= item.dues %> CUOTAS SIN INTERÉS</p>
+        </article>
+    </section>
+    <!-- Sección del carrusel de productos relacionados -->
+    <section class="glide slider container">
+        <h2 class="slider__title">Productos Relacionados</h2>
+        <!-- Contenedor del carrusel -->
+        <div class="glide__track" data-glide-el="track">
+            <ul class="slider__items glide__slides">
+                <!-- Ítemes individuales en el carrusel -->
+                <% products.forEach(Product => { %>
+                <li class="slider__item glide__slide">
+                    <article class="tarjeta">
+                        <a class="tarjeta__link" href="/shop/item/<%= Product.product_id %>">
+                        <picture class="tarjeta__cover">
+                                <span class="tarjeta__tag">Nuevo</span>
+                                <img class="tarjeta__img-frontal" src="/img<%= Product.image_front %>" alt="Figura coleccionable Funko de un Stormtrooper">
+                                <img class="tarjeta__img-detras" src="/img<%= Product.image_back %>" alt="Figura coleccionable Funko de un Stormtrooper en caja">
+                            </picture>
+                        <div class="tarjeta__content">
+                                <p class="tarjeta__coleccion"><%= Product.licence.licence_name%></p>
+                                <h4 class="tarjeta__nombre"><%= Product.product_name %></h4>
+                                <p class="tarjeta__precio"><%= Product.price%></p>
+                                <p class="tarjeta__promo"><%= Product.dues%> CUOTAS SIN INTERÉS</p>
+                        </div>
+                        </a>
+                    </article>
+                </li>
+                <% }) %>  
+            </ul>
+        </div>
+        <!-- Controles de navegación del carrusel -->
+        <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><iconify-icon icon="tabler:chevron-left"></iconify-icon></button>
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><iconify-icon icon="tabler:chevron-right"></iconify-icon></button>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
+
+<!-- Inclusión del script para iconos -->
+<script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
+
+<!-- Inclusión de scripts para el carrusel -->
+<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+<script>
+    new Glide('.glide',
+        {
+            type: 'carousel',
+            startAt: 0,
+            perView: 3,
+            gap: 30,
+            breakpoints: {
+                991: {
+                    perView: 2
+                },
+                768: {
+                    perView: 1
+                }
+            }
+        }
+    ).mount();
+</script>
+
+</body>
+</html>

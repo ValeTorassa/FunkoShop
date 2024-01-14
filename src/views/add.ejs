@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Admin | Funkoshop</title>
+
+    <!--<link rel="stylesheet" href="../css/normalize.css">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="./../css/admin.css">
+    <link rel="stylesheet" href="./../css/shop.css">
+    <link rel="stylesheet" href="./../css/estilos.css">
+
+
+    <link rel="shortcut icon" href="../img/desktop/icono.png" type="image/x-icon">
+
+        <!-- fonts -->
+        <!-- raleway -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+    <!-- inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header" id="header">
+
+        <a href="./index.html" class="header__a">
+            <div class="header__title"></div>
+        </a>
+            
+        <nav class="header__nav" id="nav">
+                <li class="nav__li"><a href="./pageShop.html">SHOP</a></li>
+                <li class="nav__li"><a href="./contacto.html">CONTACT</a></li>
+                <li class="nav__li"><a href="./login.html">LOGIN</a></li>
+                <li class="nav__li">
+                    <a href="#">
+                        <box-icon name='cart' color='#f96301' class="bx"></box-icon>
+                    </a>
+                </li>
+            </nav>           
+    </header>
+
+
+<section class="main__modal_add">
+    
+    <article class="main__add">
+
+        <h2 class="add__title">CREAR NUEVO ITEM</h2>
+
+        <form class="add__form" action="/admin/create" method="POST" enctype="application/x-www-form-urlencoded">
+
+            <article class="form_label">
+                <section class="label_category">
+                    <label class="add__form_label categoria" for="category">Categoría:</label>
+                    <select class="add__form_input" name="category">
+                        <option disabled hidden required>Seleccionar</option>    
+                        <% categories.forEach(category => { %>
+                            <option value="<%= category.category_id %>"><%= category.category_name %></option>
+                        <% }) %>
+                    </select>
+                </section>
+                
+                <section class="label_licence">
+                    <label class="add__form_label licencia" for="licence" >Licencia:</label>
+                    <select class="add__form_input" name="licence">
+                        <option hidden disabled required>Seleccionar</option>
+                        <% licences.forEach(licence => { %>
+                            <option value="<%= licence.licence_id %>"><%= licence.licence_name %></option>
+                        <% }) %>
+                    </select>
+                </section>
+            </article>
+                        
+            <label class="add__form_label name" for="name">Nombre del producto:
+                <input type="text" class="add__form_input" placeholder="Kakashi Hatake Saga" name="name">
+            </label>
+
+            <label class="add__form_label message" for="description">
+                <textarea class="add__form_input" placeholder="Descripción del producto" name="description"></textarea>
+            </label>
+            
+            <label class="add__form_label sku" for="sku">SKU:
+                <input type="text" class="add__form_input" size="7" placeholder="SSK111AB001" name="sku">
+            </label>
+            
+            <label class="add__form_label price" for="price">Precio:
+                <input type="text" class="add__form_input" placeholder="$0.0000,00" size="7" name="price">
+            </label>
+            
+            <label class="add__form_label stock" for="stock">Stock:
+                <input type="text" class="add__form_input" placeholder="0" size="3" name="stock">
+                <span>Unidades</span>
+            </label>
+            
+            <label class="add__form_label descuentos" for="discount">Descuento:
+                <input type="text" class="add__form_input" placeholder="0%" size="3" name="discount">
+            </label>
+
+            <label class="add__form_label descuentos" for="discount">Cuotas:
+                <input type="text" class="add__form_input" placeholder="0" size="3" name="dues">
+            </label>
+            
+            <input type="submit" class="add__from_input"  value="Agregar Producto">
+
+            <input type="reset" class="add__from_input" value="Limpiar">
+            
+            
+        </form>
+
+
+    </article>
+</section>
+
+    <footer class="footer footer__shop" id="footerAdd">
+        <div class="footer__div">
+            <div class="footer__nav">
+                <li><a href="./pageShop.html">SHOP</a></li>
+                <li><a href="./register.html">REGISTRARSE</a></li>
+                <li><a href="./login.html">INGRESAR</a></li>
+                <li><a href="./contacto.html">CONTACTO</a></li>
+            </div>
+            <div class="footer__logo"></div>
+        </div>
+        <h5 class="footer__copy_text">All rights reserved 2022 - FunkoShop & copy</h5>
+    </footer>
+
+</body>
+</html>
